@@ -1,0 +1,81 @@
+[
+  {
+    repo_name: 'SBOM-Unextrected',
+    id: 'python.flask.security.audit.directly-returned-format-string.directly-returned-format-string',
+    is_ignored: false,
+    message: "Detected Flask route directly returning a formatted string. This is subject to cross-site scripting if user input can reach the string. Consider using the template engine instead and rendering pages with 'render_template()'.",
+    severity: 'WARNING',
+    confidence: 'MEDIUM',
+    file_name: 'owasp_llm_vuln_demo.py',
+    file_type: 'py',
+    location: {
+      path: 'owasp_llm_vuln_demo.py',
+      url: 'https://github.com/9zaid/SBOM-Unextrected/blob/master/owasp_llm_vuln_demo.py#L23',
+      start_line: 23,
+      end_line: 23
+    },
+    cwe: [
+      {
+        cwe_id: 'CWE-79',
+        url: 'https://cwe.mitre.org/data/definitions/79.html',
+        desc: "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+      }
+    ],
+    owasp_llm: [
+      {
+        owasp_llm_id: 'LLM02',
+        owasp_llm_name: 'Insecure Output Handling',
+        cwe_name: "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+        cwe_desc: 'If the unsanitized output leads to XSS vulnerabilities.',
+        description: 'Failure to properly validate, sanitize, and handle LLM outputs before they are passed downstream to other systems, leading to vulnerabilities like XSS, CSRF, RCE.'
+      }
+    ],
+    mitre: [
+      {
+        mitre_id: 'AML.T0024.000',
+        mitre_technique_url: 'https://atlas.mitre.org/techniques/AML.T0024.000',
+        mitre_technique_name: 'Exfiltration via AI Inference API: Infer Training Data Membership',
+        mitre_technique_desc: 'Adversaries may infer the membership of a data sample in its training set, which raises privacy concerns. Some strategies make use of a shadow model that could be obtained via Train Proxy via Replication, others use statistics of model prediction scores.This can cause the victim model to leak private information, such as PII of those in the training set or other forms of prote.'
+      },
+      {
+        mitre_id: 'AML.T0024.001',
+        mitre_technique_url: 'https://atlas.mitre.org/techniques/AML.T0024.001',
+        mitre_technique_name: 'Exfiltration via AI Inference API: Invert AI Model',
+        mitre_technique_desc: "AI models' training data could be reconstructed by exploiting the confidence scores that are available via an inference API. By querying the inference API strategically, adversaries can back out potentially private information embedded within the training data. This could lead to privacy violations if the attacker can reconstruct the data of sensitive features used in the algorithm."
+      }
+    ]
+  }
+  {
+    account_name: 'zaid gt',
+    repo_name: 'test-code-analysis',
+    id: 'python.flask.security.insecure-deserialization.insecure-deserialization',
+    message: 'Detected the use of an insecure deserialization library in a Flask route. These libraries are prone to code execution vulnerabilities. Ensure user data does not enter this function. To fix this, try to avoid serializing whole objects. Consider instead using a serializer such as JSON.',
+    severity: 'ERROR',
+    confidence: 'LOW',
+    file_name: 'owasp_llm_vuln_two.py',
+    file_type: 'py',
+    location: {
+      path: 'owasp_llm_vuln_two.py',
+      url: 'https://github.com/9zaid/test-code-analysis/blob/master/owasp_llm_vuln_two.py#L101',
+      start_line: 101,
+      end_line: 101
+    },
+    cwe: [
+      {
+        cwe_id: 'CWE-502',
+        url: 'https://cwe.mitre.org/data/definitions/502.html',
+        desc: 'Deserialization of Untrusted Data'
+      }
+    ],
+    owasp_llm: [
+      {
+        owasp_llm_id: 'LLM05',
+        owasp_llm_name: 'Supply Chain Vulnerabilities',
+        cwe_name: 'Deserialization of Untrusted Data',
+        cwe_desc: 'If serialized model artifacts or data from the supply chain contain malicious payloads.',
+        description: 'Risks associated with third-party dependencies and components (pre-trained models, datasets, libraries, plugins) used in developing or deploying LLMs, introducing security weaknesses or backdoors'
+      }
+    ],
+    mitre: []
+  }
+]
